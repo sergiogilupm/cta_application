@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+<h1>This is <%= @station.name %> station</h1>
+<br>
+<h2>Next train arrivals:</h2>
+<p>Temporarily unavailable</p>
+<p>
+  <strong>Name:</strong>
+  <%= @station.name %>
+</p>
+
+<p>
+  <strong>Cta identifier:</strong>
+  <%= @station.cta_identifier %>
+</p>
+
+<%= link_to 'Edit', edit_station_path(@station) %> |
+<%= link_to 'Back', stations_path %>
