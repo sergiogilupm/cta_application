@@ -26,7 +26,8 @@ class StationsController < ApplicationController
     def show
         url = "#{ base_path }&mapid=#{ @station.cta_identifier }&outputType=JSON"
         response = self.class.get(url)
-        @arrivals = process_arrivals(response.body)
+        @arrivals = JSON.parse(response.body)["ctatt"]["eta"]
+        @arrivals_pretty = process_arrivals(response.body)
     end
 
     def process_arrivals(json_file)
@@ -35,8 +36,13 @@ class StationsController < ApplicationController
         if error_code.to_i > 0
             return "Unavailable"
         end
-        arrivals_hash = parsed_json["ctatt"]["eta"]
-        return arrivals_hash
+        arrivals_raw_hash = parsed_json["ctatt"]["eta"]
+        arrivals_array = []
+        arrivals_raw_hash.each do |arrival_raw_hash|
+            hash = [ { :train_number => "test", :destination => "destTest", :line_name => "lineTestName", :arrival_time => "arrTestTime" } ]
+            arrivals_array.push(hash)
+        end
+        return arrivals_array
     end
 
     # GET /stations/new

@@ -10,12 +10,27 @@
       </tr>
     <% @arrivals.each do |arrival| %>
       <tr>
-        <td><%= arrival["rn"] %></td>
+        <td><%= arrival["train"] %></td>
         <td><%= arrival["destNm"] %></td>
-        <td><%= arrival["rt"] %></td>
+        <td><%= arrival["isApp"] %></td>
       </tr>
     <% end %>
 </table>
+<table>
+      <tr>
+        <th>Train number</th>
+        <th>Destination</th>
+        <th>Line</th>
+      </tr>
+    <% @arrivals_pretty.each do |arrival_pretty| %>
+      <tr>
+        <td><%= arrival_pretty %></td>
+        <td><%= arrival_pretty %></td>
+        <td><%= arrival_pretty %></td>
+      </tr>
+    <% end %>
+</table>
+
 <p>
   <strong>Name:</strong>
   <%= @station.name %>
