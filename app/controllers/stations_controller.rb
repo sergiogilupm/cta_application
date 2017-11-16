@@ -1,5 +1,6 @@
 require 'httparty'
 require 'json'
+require 'date'
 
 class StationsController < ApplicationController
     before_action :set_station, only: [:show, :edit, :update, :destroy]
@@ -39,8 +40,19 @@ class StationsController < ApplicationController
         arrivals_raw_hash = parsed_json["ctatt"]["eta"]
         arrivals_array = []
         arrivals_raw_hash.each do |arrival_raw_hash|
-            hash = [ { :train_number => "test", :destination => "destTest", :line_name => "lineTestName", :arrival_time => "arrTestTime" } ]
-            arrivals_array.push(hash)
+            train_number = arrival_raw_hash["rn"]
+            destination = arrival_raw_hash["destNm"]
+            line_name = arrival_raw_hash["rt"]
+            is_train_due = arrival_raw_hash["isApp"].to_i
+            if is_train_due == 1
+                arrival_time = "Now approaching"
+            else
+                current_date = DateTime.parse(arrival_raw_hash["prdt"])
+                arrival_date = DateTime.parse(arrival_raw_hash["arrT"])
+                arrival_time = ((arrival_date - current_date) * 24 * 60).to_i
+            end
+            arrival = [ train_number, destination, line_name, arrival_time ]
+            arrivals_array.push(arrival)
         end
         return arrivals_array
     end

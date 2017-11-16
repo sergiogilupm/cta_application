@@ -7,26 +7,14 @@
         <th>Train number</th>
         <th>Destination</th>
         <th>Line</th>
-      </tr>
-    <% @arrivals.each do |arrival| %>
-      <tr>
-        <td><%= arrival["train"] %></td>
-        <td><%= arrival["destNm"] %></td>
-        <td><%= arrival["isApp"] %></td>
-      </tr>
-    <% end %>
-</table>
-<table>
-      <tr>
-        <th>Train number</th>
-        <th>Destination</th>
-        <th>Line</th>
+        <th>Arrival</th>
       </tr>
     <% @arrivals_pretty.each do |arrival_pretty| %>
       <tr>
-        <td><%= arrival_pretty %></td>
-        <td><%= arrival_pretty %></td>
-        <td><%= arrival_pretty %></td>
+        <td><%= arrival_pretty[0] %></td>
+        <td><%= arrival_pretty[1] %></td>
+        <td><%= arrival_pretty[2] %></td>
+        <td><%= arrival_pretty[3] %></td>
       </tr>
     <% end %>
 </table>
