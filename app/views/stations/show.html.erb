@@ -1,8 +1,21 @@
 <p id="notice"><%= notice %></p>
 <h1>This is <%= @station.name %> station</h1>
 <br>
-<h2>Next train arrivals:</h2>
-<p>Temporarily unavailable</p>
+<h2>Next train arrivals</h2>
+<table>
+      <tr>
+        <th>Train number</th>
+        <th>Destination</th>
+        <th>Line</th>
+      </tr>
+    <% @arrivals.each do |arrival| %>
+      <tr>
+        <td><%= arrival["rn"] %></td>
+        <td><%= arrival["destNm"] %></td>
+        <td><%= arrival["rt"] %></td>
+      </tr>
+    <% end %>
+</table>
 <p>
   <strong>Name:</strong>
   <%= @station.name %>

@@ -1,21 +1,48 @@
+require 'httparty'
+require 'json'
+
 class StationsController < ApplicationController
-  before_action :set_station, only: [:show, :edit, :update, :destroy]
+    before_action :set_station, only: [:show, :edit, :update, :destroy]
+  
+    include HTTParty
+    base_uri 'http://lapi.transitchicago.com'
 
-  # GET /stations
-  # GET /stations.json
-  def index
-    @stations = Station.all
-  end
+    def api_key
+        #ENV['PIXELPEEPER_API_KEY']
+    end
 
-  # GET /stations/1
-  # GET /stations/1.json
-  def show
-  end
+    def base_path
+      "/api/1.0/ttarrivals.aspx?key=#{ api_key }"
+    end
+    
+    # GET /stations
+    # GET /stations.json
+    def index
+        @stations = Station.all
+    end
 
-  # GET /stations/new
-  def new
-    @station = Station.new
-  end
+    # GET /stations/1
+    # GET /stations/1.json
+    def show
+        url = "#{ base_path }&mapid=#{ @station.cta_identifier }&outputType=JSON"
+        response = self.class.get(url)
+        @arrivals = process_arrivals(response.body)
+    end
+
+    def process_arrivals(json_file)
+        parsed_json = JSON.parse(json_file)
+        error_code = parsed_json["ctatt"]["errCd"]
+        if error_code.to_i > 0
+            return "Unavailable"
+        end
+        arrivals_hash = parsed_json["ctatt"]["eta"]
+        return arrivals_hash
+    end
+
+    # GET /stations/new
+    def new
+        @station = Station.new
+    end
 
   # GET /stations/1/edit
   def edit
