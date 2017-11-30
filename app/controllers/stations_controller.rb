@@ -9,7 +9,7 @@ class StationsController < ApplicationController
     base_uri 'http://lapi.transitchicago.com'
 
     def api_key
-        #ENV['PIXELPEEPER_API_KEY']
+        ENV['CTA_API_KEY']
     end
 
     def base_path
