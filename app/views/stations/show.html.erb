@@ -1,23 +1,29 @@
 <p id="notice"><%= notice %></p>
-<h1>This is <%= @station.name %> station</h1>
+<h2>This is <%= @station.name %> station</h2>
 <br>
-<h2>Next train arrivals</h2>
-<table>
-      <tr>
-        <th>Train number</th>
-        <th>Destination</th>
-        <th>Line</th>
-        <th>Arrival</th>
-      </tr>
-    <% @arrivals_pretty.each do |arrival_pretty| %>
-      <tr>
-        <td><%= arrival_pretty[0] %></td>
-        <td><%= arrival_pretty[1] %></td>
-        <td><%= arrival_pretty[2] %></td>
-        <td><%= arrival_pretty[3] %></td>
-      </tr>
-    <% end %>
-</table>
+<h3>Next train arrivals</h3>
+<% if @arrivals_pretty.to_a.empty? %>
+<b>NO TRAIN INFORMATION FOR THIS STATION</b>
+<% else %>
+  <table>
+        <tr>
+          <th>Train number</th>
+          <th>Destination</th>
+          <th>Line</th>
+          <th>Arrival</th>
+        </tr>
+
+        <% @arrivals_pretty.each do |arrival_pretty| %>
+          <tr>
+            <td><%= arrival_pretty[0] %></td>
+            <td><%= arrival_pretty[1] %></td>
+            <td><%= arrival_pretty[2] %></td>
+            <td><%= arrival_pretty[3] %></td>
+          </tr>
+        <% end %>
+  </table>
+<% end %>
+
 
 <p>
   <strong>Name:</strong>

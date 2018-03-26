@@ -1,6 +1,9 @@
+<%= react_component 'Main' %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <p id="notice"><%= notice %></p>
 
-<h1>Stations</h1>
+<h2>Stations</h2>
 
 <table>
   <thead>
@@ -12,13 +15,33 @@
   </thead>
 
   <tbody>
-    <% @stations.each do |station| %>
+  <iframe frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDtzk4wqytbyPmzI2Bnb0EHK9oMMKCUUIE&q=initMap"
+          allowfullscreen>
+  </iframe>
+  <script>
+      var map;
+      function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: -34.397, lng: 150.644},
+              zoom: 8
+          });
+      }
+  </script>
+
+  <% @stations.each do |station| %>
       <tr>
         <td><%= station.name %></td>
         <td><%= station.cta_identifier %></td>
-        <td><%= link_to 'Show', station %></td>
-        <td><%= link_to 'Edit', edit_station_path(station) %></td>
-        <td><%= link_to 'Destroy', station, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'View Details',
+                          station,
+                          :method => :get,
+                          :class =>'mdl-button mdl-js-button mdl-button--raised'
+                       %>
+        </td>
+        <!--<td><%= link_to 'Show', station %></td>-->
+        <!--<td><%= link_to 'Edit', edit_station_path(station) %></td>-->
+        <!--<td><%= link_to 'Destroy', station, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>

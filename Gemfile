@@ -28,7 +28,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
+# Use jquery
+gem 'jquery-rails'
 # gem 'bcrypt', '~> 3.1.7'
+# Use material component
+gem 'materialize-sass'
+# React for Ruby on Rails
+gem 'react-rails'
 
 group :production do
   gem 'pg', '0.20.0'
