@@ -3,17 +3,6 @@ require 'station_service'
 
 class StationsController < ApplicationController
     before_action :set_station, only: [:show, :edit, :update, :destroy]
-  
-    include HTTParty
-    base_uri 'http://lapi.transitchicago.com'
-
-    def api_key
-        ENV['CTA_API_KEY']
-    end
-
-    def base_path
-      "/api/1.0/ttarrivals.aspx?key=#{ api_key }"
-    end
     
     # GET /stations
     # GET /stations.json
@@ -24,16 +13,7 @@ class StationsController < ApplicationController
     # GET /stations/1
     # GET /stations/1.json
     def show
-        #url = "#{ base_path }&mapid=#{ @station.cta_identifier }&outputType=JSON"
-        #response = self.class.get(url)
-        #@arrivals = JSON.parse(response.body)["ctatt"]["eta"]
-        @arrivals_pretty = StationService.new({cta_identifier: @station.cta_identifier}).get_arrivals
-        #@arrivals_pretty = stationService.get_arrivals(@station.cta_identifier)
-    end
-
-    # GET /stations/new
-    def new
-        @station = Station.new
+        @arrivals = StationService.new({map_id: @station.map_id}).get_arrivals
     end
 
   # GET /stations/1/edit
@@ -88,6 +68,6 @@ class StationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def station_params
-      params.require(:station).permit(:name, :cta_identifier)
+      params.require(:station).permit(:name, :map_id)
     end
 end

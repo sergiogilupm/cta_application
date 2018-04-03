@@ -2,7 +2,7 @@
 <h2>This is <%= @station.name %> station</h2>
 <br>
 <h3>Next train arrivals</h3>
-<% if @arrivals_pretty.to_a.empty? %>
+<% if @arrivals.to_a.empty? %>
 <b>NO TRAIN INFORMATION FOR THIS STATION</b>
 <% else %>
   <table>
@@ -13,27 +13,13 @@
           <th>Arrival</th>
         </tr>
 
-        <% @arrivals_pretty.each do |arrival_pretty| %>
+        <% @arrivals.each do |arrival| %>
           <tr>
-            <td><%= arrival_pretty[0] %></td>
-            <td><%= arrival_pretty[1] %></td>
-            <td><%= arrival_pretty[2] %></td>
-            <td><%= arrival_pretty[3] %></td>
+            <td><%= arrival["train_number"] %></td>
+            <td><%= arrival["destination"] %></td>
+            <td><%= arrival["line_name"] %></td>
+            <td><%= arrival["arrival_time"] %></td>
           </tr>
         <% end %>
   </table>
 <% end %>
-
-
-<p>
-  <strong>Name:</strong>
-  <%= @station.name %>
-</p>
-
-<p>
-  <strong>Cta identifier:</strong>
-  <%= @station.cta_identifier %>
-</p>
-
-<%= link_to 'Edit', edit_station_path(@station) %> |
-<%= link_to 'Back', stations_path %>
