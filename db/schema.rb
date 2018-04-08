@@ -10,20 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119184752) do
+ActiveRecord::Schema.define(version: 20180408152650) do
 
   create_table "lines", force: :cascade do |t|
     t.string "internal_name"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "_24H_service"
+  end
+
+  create_table "station_details", force: :cascade do |t|
+    t.integer "map_id"
+    t.string "internal_line_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stations", force: :cascade do |t|
     t.string "name"
-    t.integer "cta_identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "map_id"
+    t.integer "latitude"
+    t.integer "longitude"
   end
 
   create_table "trains", force: :cascade do |t|

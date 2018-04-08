@@ -32,7 +32,7 @@
     <thead>
     <tr>
       <th>Name</th>
-      <th>Cta identifier</th>
+      <th>Map ID</th>
       <th colspan="3"></th>
     </tr>
     </thead>
@@ -41,7 +41,7 @@
     <% @stations.each do |station| %>
       <tr>
         <td><%= station.name %></td>
-        <td><%= station.cta_identifier %></td>
+        <td><%= station.map_id %></td>
         <td><%= button_to 'View Details',
                           station,
                           :method => :get,
