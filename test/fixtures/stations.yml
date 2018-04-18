@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  cta_identifier: 1
+  map_id: 1
 
 two:
   name: MyString
-  cta_identifier: 1
+  map_id: 1

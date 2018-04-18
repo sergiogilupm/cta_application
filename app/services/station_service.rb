@@ -57,14 +57,12 @@ class StationService
             arrival_date = DateTime.parse(arrival[ARRIVAL_TIME])
             arrival_time = ((arrival_date - current_date) * 24 * 60).to_i
           end
-          #processed_arrival = [train_number, destination, line_name, arrival_time]
-          new_arrival = {
+          processed_arrival = {
               "train_number" => train_number,
               "destination" => destination,
               "line_name" => line_name,
               "arrival_time" => arrival_time
           }
-          processed_arrival = JSON.parse(new_arrival)
           processed_arrivals.push(processed_arrival)
         end
       end

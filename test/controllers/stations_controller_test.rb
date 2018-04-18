@@ -10,14 +10,9 @@ class StationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_station_url
-    assert_response :success
-  end
-
   test "should create station" do
     assert_difference('Station.count') do
-      post stations_url, params: { station: { cta_identifier: @station.cta_identifier, name: @station.name } }
+      post stations_url, params: { station: { map_id: @station.map_id, name: @station.name } }
     end
 
     assert_redirected_to station_url(Station.last)
@@ -34,7 +29,7 @@ class StationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update station" do
-    patch station_url(@station), params: { station: { cta_identifier: @station.cta_identifier, name: @station.name } }
+    patch station_url(@station), params: { station: { map_id: @station.map_id, name: @station.name } }
     assert_redirected_to station_url(@station)
   end
 
